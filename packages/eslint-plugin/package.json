@@ -1,6 +1,6 @@
 {
   "name": "@zireal/eslint-plugin-result-kit",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "ESLint rules enforcing @zireal/result-kit's must-use-result vocabulary — the full-fidelity host.",
   "type": "module",
   "main": "./dist/index.js",
@@ -11,8 +11,16 @@
       "default": "./dist/index.js"
     }
   },
-  "files": ["dist"],
-  "keywords": ["eslint", "eslintplugin", "eslint-plugin", "result-kit", "must-use-result"],
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "result-kit",
+    "must-use-result"
+  ],
   "license": "MIT",
   "author": "Ali Farooq",
   "homepage": "https://github.com/alifaroo-q/result-kit-lint/tree/main/packages/eslint-plugin",
