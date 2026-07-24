@@ -1,6 +1,6 @@
 {
   "name": "@zireal/oxlint-plugin-result-kit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Oxlint (syntax-tier) port of must-use-result — a re-export of the shared rule-core rule.",
   "type": "module",
   "main": "./dist/index.js",
