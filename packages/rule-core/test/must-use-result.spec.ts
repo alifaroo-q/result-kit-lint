@@ -30,8 +30,8 @@ describe("must-use-result — flags a dropped Result (matcher a: import provenan
     expect(reports[0]!.data).toEqual({ callee: "success" });
   });
 
-  it("interpolates the callee name into the message", () => {
-    expect(run(`ok(1);`)[0]!.message).toContain("`ok`");
+  it("emits the shared must-use guidance (discard with void)", () => {
+    expect(run(`ok(1);`)[0]!.message).toContain("`void`");
   });
 
   it("flags every dropped Result in a file independently", () => {

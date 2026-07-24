@@ -26,8 +26,11 @@ export const mustUseResultMeta: RuleMeta = {
     url: "https://github.com/alifaroo-q/result-kit-lint/blob/main/docs/rules/must-use-result.md",
   },
   messages: {
+    // Generic and host-neutral: the ESLint type-aware rule fires on Result
+    // expressions that have no callee name to interpolate (awaited results, bare
+    // references), so both hosts emit exactly this text — one vocabulary.
     mustUse:
-      "The Result from `{{callee}}` is dropped. Handle it (match / unwrapOr / isOk / return it) " +
+      "This Result is never used. Handle it — match / unwrapOr / isOk, or return it — " +
       "or discard it explicitly with `void`.",
   },
   fixable: "code",
