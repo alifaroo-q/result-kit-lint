@@ -1,5 +1,12 @@
 # @zireal/oxlint-plugin-result-kit
 
+## 0.1.1
+
+### Patch Changes
+
+- 6b6772a: Add per-package READMEs so the npm package pages render install, usage, rules,
+  and capability-tier docs (previously blank — only the monorepo root had a README).
+
 ## 0.1.0
 
 ### Minor Changes
