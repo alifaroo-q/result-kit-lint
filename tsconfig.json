@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["node", "vitest/globals"],
+    "paths": {
+      "@zireal/result-kit-rule-core": ["./packages/rule-core/src/index.ts"]
+    }
+  },
+  "include": ["packages/*/src", "packages/*/test"]
+}

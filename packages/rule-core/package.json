@@ -1,0 +1,27 @@
+{
+  "name": "@zireal/result-kit-rule-core",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Private shared brain for the result-kit lint plugins — structural Result matchers + the shared { meta, create } module. Bundled into each host plugin.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "test": "vitest run",
+    "clean": "rm -rf dist *.tsbuildinfo"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^8.65.0",
+    "oxc-parser": "^0.141.0"
+  }
+}

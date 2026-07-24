@@ -1,0 +1,24 @@
+{
+  "name": "@zireal/result-kit-lint",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Lint enforcement for @zireal/result-kit — must-use-result across ESLint and Oxlint",
+  "type": "module",
+  "packageManager": "pnpm@10.34.4",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "build": "pnpm -r --filter \"./packages/*\" build",
+    "test": "pnpm -r --filter \"./packages/*\" test",
+    "check": "tsc --noEmit",
+    "clean": "pnpm -r --filter \"./packages/*\" clean"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.1",
+    "@vitest/coverage-v8": "^3.2.7",
+    "tsdown": "^0.15.6",
+    "typescript": "5.9.3",
+    "vitest": "^3.2.4"
+  }
+}

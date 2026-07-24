@@ -1,0 +1,36 @@
+{
+  "name": "@zireal/eslint-plugin-result-kit",
+  "version": "0.0.0",
+  "description": "ESLint rules enforcing @zireal/result-kit's must-use-result vocabulary — the full-fidelity host.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "keywords": ["eslint", "eslintplugin", "eslint-plugin", "result-kit", "must-use-result"],
+  "engines": {
+    "node": ">=22.12"
+  },
+  "peerDependencies": {
+    "eslint": ">=9.0.0"
+  },
+  "dependencies": {
+    "@typescript-eslint/utils": "^8.65.0"
+  },
+  "devDependencies": {
+    "@zireal/result-kit-rule-core": "workspace:*",
+    "@typescript-eslint/parser": "^8.65.0",
+    "@typescript-eslint/rule-tester": "^8.65.0",
+    "eslint": "^9.20.0"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "test": "vitest run",
+    "clean": "rm -rf dist *.tsbuildinfo"
+  }
+}
