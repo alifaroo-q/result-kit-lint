@@ -31,6 +31,11 @@ jobs:
           cache: pnpm
           registry-url: https://registry.npmjs.org
 
+      # Trusted publishing (OIDC) requires npm >= 11.5.1; `changeset publish`
+      # shells out to the global npm, and Node 24's bundled npm may be older.
+      - name: Ensure npm supports trusted publishing
+        run: npm install -g npm@latest
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
