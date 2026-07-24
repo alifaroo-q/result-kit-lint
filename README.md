@@ -31,11 +31,18 @@ consumer corpus is ~82% of dropped `Result`s
 ([syntax-tier probe](https://github.com/alifaroo-q/result-kit/blob/main/docs/research/must-use-result-syntax-tier-probes.md)).
 Never claim parity that isn't there.
 
-## Rules (round one)
+## Rules
 
-- **`must-use-result`** — a `Result`-returning call whose value is dropped or never collapsed is an error.
+ESLint (type-aware, full tier):
 
-Backlog: `no-throw-in-result-fn`, `no-unhandled-err-branch`.
+- **`must-use-result`** — a `Result`-returning call whose value is dropped or never collapsed is an error. ([docs](docs/rules/must-use-result.md))
+- **`no-throw-in-result-fn`** — a function declared to return a `Result` should not `throw`. ([docs](docs/rules/no-throw-in-result-fn.md))
+
+Oxlint (syntax tier): `must-use-result`.
+
+Backlog: `no-unhandled-err-branch` (deferred — its "reading `.value` without narrowing"
+form is already covered by `tsc`, and the flow-narrowing it needs is not reliably
+reflected by the linter's type service; a non-redundant redesign is open).
 
 ## Development
 

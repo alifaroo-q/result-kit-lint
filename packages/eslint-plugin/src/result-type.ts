@@ -48,25 +48,29 @@ function okPropertyIsBooleanLiteral(
   return false;
 }
 
-/** Is `type` exactly one `Result` half — `{ ok, value }` or `{ ok, error }`? */
-function isResultHalf(type: Type, checker: TypeChecker, location: TsNode): boolean {
-  if (type.flags & TypeFlags.Any) return false;
+/** The half a constituent is, or `null` if it is not a `Result` half at all. */
+type ResultHalf = "ok" | "err" | null;
+
+/** Which `Result` half is `type` — `{ ok, value }`, `{ ok, error }`, or neither? */
+function resultHalfKind(type: Type, checker: TypeChecker, location: TsNode): ResultHalf {
+  if (type.flags & TypeFlags.Any) return null;
   const props = checker.getPropertiesOfType(type);
   // §2: exactly two fields per half. The `exactly` rejects a foreign union with
   // an extra field (probe case O).
-  if (props.length !== 2) return false;
-  const names = props.map((p) => p.name).sort();
-  const isOkValue = names[0] === "ok" && names[1] === "value";
-  const isOkError = names[0] === "error" && names[1] === "ok";
-  if (!isOkValue && !isOkError) return false;
+  if (props.length !== 2) return null;
   const okSymbol = props.find((p) => p.name === "ok");
-  if (!okSymbol) return false;
-  return okPropertyIsBooleanLiteral(okSymbol, checker, location);
+  if (!okSymbol || !okPropertyIsBooleanLiteral(okSymbol, checker, location)) return null;
+  const names = props.map((p) => p.name).sort();
+  if (names[0] === "ok" && names[1] === "value") return "ok";
+  if (names[0] === "error" && names[1] === "ok") return "err";
+  return null;
 }
 
 /**
- * Is `rawType` the type of an unconsumed `Result`? `location` anchors symbol
- * type resolution (a node the checker can use as scope).
+ * Is `rawType` the type of an unconsumed `Result`? Generous per feasibility
+ * §1.1 — **at least one** constituent is a `Result` half (a dropped `Ok` is
+ * still a dropped `Result`) — but bails on `any`. `location` anchors symbol type
+ * resolution (a node the checker can use as scope).
  */
 export function isResultType(rawType: Type, checker: TypeChecker, location: TsNode): boolean {
   // Carve out `any` before anything else — the whole false-positive surface.
@@ -80,7 +84,26 @@ export function isResultType(rawType: Type, checker: TypeChecker, location: TsNo
     const c = resolveConstraint(raw, checker);
     if (c.flags & NULLISH) continue; // drop null/undefined/void first
     if (c.flags & TypeFlags.Any) return false; // any anywhere in the union → bail
-    if (isResultHalf(c, checker, location)) sawResultHalf = true;
+    if (resultHalfKind(c, checker, location) !== null) sawResultHalf = true;
   }
   return sawResultHalf;
+}
+
+/**
+ * The `Result` (possibly `Promise<Result>`) return-contract check for
+ * `no-throw-in-result-fn`: unwraps a single-argument `Promise` for `async`
+ * functions, then applies {@link isResultType}.
+ */
+export function isResultReturnContract(
+  returnType: Type,
+  checker: TypeChecker,
+  location: TsNode,
+): boolean {
+  let type = returnType;
+  const symbol = type.getSymbol();
+  if (symbol?.getName() === "Promise") {
+    const args = checker.getTypeArguments(type as import("typescript").TypeReference);
+    if (args.length === 1 && args[0]) type = args[0];
+  }
+  return isResultType(type, checker, location);
 }
