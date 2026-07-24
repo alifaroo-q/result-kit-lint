@@ -13,6 +13,18 @@
   },
   "files": ["dist"],
   "keywords": ["eslint", "eslintplugin", "eslint-plugin", "result-kit", "must-use-result"],
+  "license": "MIT",
+  "author": "Ali Farooq",
+  "homepage": "https://github.com/alifaroo-q/result-kit-lint/tree/main/packages/eslint-plugin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alifaroo-q/result-kit-lint.git",
+    "directory": "packages/eslint-plugin"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "engines": {
     "node": ">=22.12"
   },

@@ -13,6 +13,18 @@
   },
   "files": ["dist"],
   "keywords": ["oxlint", "oxlint-plugin", "result-kit", "must-use-result"],
+  "license": "MIT",
+  "author": "Ali Farooq",
+  "homepage": "https://github.com/alifaroo-q/result-kit-lint/tree/main/packages/oxlint-plugin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alifaroo-q/result-kit-lint.git",
+    "directory": "packages/oxlint-plugin"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "engines": {
     "node": ">=22.12"
   },

@@ -12,9 +12,19 @@
     "build": "pnpm -r --filter \"./packages/*\" build",
     "test": "pnpm -r --filter \"./packages/*\" test",
     "check": "tsc --noEmit",
-    "clean": "pnpm -r --filter \"./packages/*\" clean"
+    "clean": "pnpm -r --filter \"./packages/*\" clean",
+    "changeset": "changeset",
+    "changeset:version": "changeset version",
+    "changeset:publish": "pnpm build && changeset publish"
+  },
+  "license": "MIT",
+  "author": "Ali Farooq",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alifaroo-q/result-kit-lint.git"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.31.1",
     "@types/node": "^22.20.1",
     "@vitest/coverage-v8": "^3.2.7",
     "tsdown": "^0.15.6",
